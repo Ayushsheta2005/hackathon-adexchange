@@ -27,69 +27,58 @@ function fromAtomic(atomic: bigint): string {
   return `${whole.toString()}.${frac.toString().padStart(6, "0")}`;
 }
 
-/** Context-aware listing templates — different verticals trigger different persona bidding behavior */
+/**
+ * Listing verticals — each biases how the 3 personas bid.
+ * All bid amounts are clamped above FLOOR_PRICE_MIN_USDC and below MAX_CLEARING_PRICE_USDC.
+ */
 const LISTING_TEMPLATES = [
   {
     vertical: "premium-fashion",
-    contextTags: ["luxury", "fashion", "premium"],
-    // LuxuryCo loves this — bids near max. GrowthCo ignores. RetailCo mid.
-    biasFn: (agentId: string) => {
-      if (agentId === "buyer-luxuryco") return 0.85 + Math.random() * 0.15; // 0.85–1.0 of max range
-      if (agentId === "buyer-growthco") return 0.05 + Math.random() * 0.10; // near floor
-      return 0.40 + Math.random() * 0.25; // mid
-    },
+    contextTags: ["luxury", "fashion", "premium"] as string[],
+    // LuxuryCo dominates (0.085–0.10 USDC), GrowthCo near floor, RetailCo mid
+    bias: { "buyer-luxuryco": 0.88, "buyer-growthco": 0.12, "buyer-retailco": 0.50 },
   },
   {
     vertical: "dev-news",
-    contextTags: ["tech", "developer", "saas"],
-    // GrowthCo loves this — LuxuryCo pulls back hard.
-    biasFn: (agentId: string) => {
-      if (agentId === "buyer-growthco") return 0.80 + Math.random() * 0.20;
-      if (agentId === "buyer-luxuryco") return 0.05 + Math.random() * 0.10;
-      return 0.30 + Math.random() * 0.20;
-    },
+    contextTags: ["tech", "developer", "saas"] as string[],
+    // GrowthCo dominates, LuxuryCo near floor, RetailCo mid
+    bias: { "buyer-luxuryco": 0.10, "buyer-growthco": 0.85, "buyer-retailco": 0.35 },
   },
   {
     vertical: "retail-checkout",
-    contextTags: ["retail", "ecommerce", "checkout-intent"],
-    // RetailCo loves this — both others are moderate.
-    biasFn: (agentId: string) => {
-      if (agentId === "buyer-retailco") return 0.80 + Math.random() * 0.20;
-      if (agentId === "buyer-growthco") return 0.30 + Math.random() * 0.20;
-      return 0.50 + Math.random() * 0.20;
-    },
+    contextTags: ["retail", "ecommerce", "checkout-intent"] as string[],
+    // RetailCo dominates, both others moderate
+    bias: { "buyer-luxuryco": 0.45, "buyer-growthco": 0.30, "buyer-retailco": 0.88 },
   },
   {
     vertical: "general-news",
-    contextTags: ["news", "general"],
-    // Nobody excited — all bid low, tight race near floor.
-    biasFn: (_agentId: string) => 0.05 + Math.random() * 0.20,
+    contextTags: ["news", "general"] as string[],
+    // Tight race — all bid low
+    bias: { "buyer-luxuryco": 0.18, "buyer-growthco": 0.15, "buyer-retailco": 0.20 },
   },
 ] as const;
 
-/** Per-persona bid ranges */
 const PERSONAS = [
-  { agentId: "buyer-luxuryco", minUsdc: "0.003", maxUsdc: "0.009" },
-  { agentId: "buyer-growthco", minUsdc: "0.002", maxUsdc: "0.005" },
-  { agentId: "buyer-retailco", minUsdc: "0.002", maxUsdc: "0.008" },
+  { agentId: "buyer-luxuryco" },
+  { agentId: "buyer-growthco" },
+  { agentId: "buyer-retailco" },
 ] as const;
 
-function pickPersonaBid(agentId: string, floorUsdc: string, bias: number): string {
-  const persona = PERSONAS.find((p) => p.agentId === agentId);
-  if (!persona) return floorUsdc;
-
-  const minAtomic = toAtomic(persona.minUsdc);
-  const maxAtomic = toAtomic(persona.maxUsdc);
-  const capAtomic = toAtomic(MAX_CLEARING_PRICE_USDC);
+/**
+ * Pick a bid amount for a persona given a bias factor (0–1).
+ * 0 = just above floor, 1 = MAX_CLEARING_PRICE_USDC.
+ * Adds ±10% jitter so identical bias values don't always tie.
+ */
+function pickBid(bias: number, floorUsdc: string): string {
   const floorAtomic = toAtomic(floorUsdc);
-
-  const effectiveMin = minAtomic > floorAtomic ? minAtomic : floorAtomic + toAtomic("0.000001");
-  const effectiveMax = maxAtomic < capAtomic ? maxAtomic : capAtomic;
-  if (effectiveMin >= effectiveMax) return fromAtomic(effectiveMax);
-
-  const span = effectiveMax - effectiveMin;
-  const biasedAtomic = effectiveMin + BigInt(Math.floor(bias * Number(span)));
-  return fromAtomic(biasedAtomic < effectiveMax ? biasedAtomic : effectiveMax);
+  const capAtomic = toAtomic(MAX_CLEARING_PRICE_USDC);
+  const span = capAtomic - floorAtomic;
+  // Bias + jitter, clamped to [floor+1unit, cap]
+  const jitter = (Math.random() - 0.5) * 0.15; // ±7.5%
+  const clamped = Math.max(0, Math.min(1, bias + jitter));
+  const val = floorAtomic + BigInt(Math.floor(clamped * Number(span)));
+  const safe = val >= floorAtomic + 1n ? val : floorAtomic + 1n;
+  return fromAtomic(safe <= capAtomic ? safe : capAtomic);
 }
 
 export interface DemoLoadRouteDeps {
@@ -108,15 +97,17 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
   const router = Router();
 
   /**
-   * POST /demo/load
-   * Runs N complete multi-agent auction cycles. Each cycle:
-   *   1. Picks a random listing vertical (fashion / dev / retail / general)
-   *   2. Has all 3 buyer personas place context-aware bids simultaneously
-   *   3. Clears a second-price auction — winner varies by vertical
-   *   4. Settles on-chain via Circle DCW
+   * POST /demo/load  { cycles?: number }
    *
-   * Returns when all cycles complete. The UI receives live SSE events
-   * (bid.received, auction.matched, settlement.confirmed) throughout.
+   * Runs N complete multi-agent auction cycles entirely in-process:
+   *   1. Pick a random listing vertical (fashion / dev / retail / general)
+   *   2. Register a fresh listing in the store
+   *   3. All 3 personas submit context-aware sealed bids directly into BidStore
+   *   4. Second-price auction clears — winner is whoever bid highest for that vertical
+   *   5. Circle DCW transfer settles on-chain
+   *   6. SSE events (auction.matched, settlement.confirmed) fire in real-time to the UI
+   *
+   * No terminal required. No payment signing. Returns JSON summary when done.
    */
   router.post("/demo/load", async (req, res, next) => {
     try {
@@ -124,7 +115,7 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
         Math.max(1, Number((req.body as { cycles?: number }).cycles ?? 50)),
         100,
       );
-      const floor = FLOOR_PRICE_MIN_USDC;
+      const floor = FLOOR_PRICE_MIN_USDC; // "0.01" USDC
 
       const completed: Array<{
         cycle: number;
@@ -137,10 +128,10 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
       let totalAtomic = 0n;
 
       for (let i = 1; i <= cycles; i++) {
-        // 1. Pick a random listing vertical for this cycle
+        // 1. Pick a random vertical — determines which persona wins
         const tpl = LISTING_TEMPLATES[Math.floor(Math.random() * LISTING_TEMPLATES.length)]!;
 
-        // 2. Register a fresh listing
+        // 2. Register a fresh listing (server removes it after confirmed settlement)
         const listing = AdInventoryListingSchema.parse({
           listingId: randomUUID(),
           sellerAgentId: "seller-agent-sigma",
@@ -154,10 +145,10 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
         });
         await deps.listingStore.add(listing);
 
-        // 3. All 3 personas place bids based on listing context
+        // 3. Each persona bids based on context-tag affinity for this vertical
         for (const persona of PERSONAS) {
-          const bias = tpl.biasFn(persona.agentId);
-          const bidAmount = pickPersonaBid(persona.agentId, floor, bias);
+          const bias = tpl.bias[persona.agentId];
+          const bidAmount = pickBid(bias, floor);
           const bid = BidRequestSchema.parse({
             bidId: randomUUID(),
             buyerAgentId: persona.agentId,
@@ -166,7 +157,7 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
               adType: "display",
               format: "banner",
               size: "300x250",
-              contextTags: tpl.contextTags.filter(() => Math.random() > 0.3),
+              contextTags: tpl.contextTags.slice(),
             },
             bidAmountUsdc: bidAmount,
             budgetRemainingUsdc: "1.000000",
@@ -174,9 +165,11 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
             createdAt: new Date().toISOString(),
           });
           await deps.bidStore.add(bid);
+          // Note: we do NOT emit "bid.received" — that event does not exist in STREAM_EVENTS.
+          // The SSE stream emits auction.matched and settlement.confirmed from runAuction().
         }
 
-        // 4. Clear the auction — second-price winner emerges
+        // 4. Clear the auction — second-price engine picks winner, fires SSE events
         const outcome = await runAuction(listing.listingId, {
           listingStore: deps.listingStore,
           bidStore: deps.bidStore,
@@ -199,7 +192,14 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
             status: receipt.status,
           });
         } else {
-          completed.push({ cycle: i, vertical: tpl.vertical, winner: "none", clearingPrice: "0", status: outcome.kind });
+          // no_eligible_bids should never happen since we just placed 3 bids above floor
+          completed.push({
+            cycle: i,
+            vertical: tpl.vertical,
+            winner: "none",
+            clearingPrice: "0.000000",
+            status: outcome.kind,
+          });
         }
       }
 

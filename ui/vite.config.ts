@@ -2,7 +2,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 // Silence ECONNREFUSED noise during the brief startup window when vite is
-// already proxying but the Express server hasn't bound to 4031 yet. The UI
+// already proxying but the Express server hasn't bound to 4021 yet. The UI
 // hooks already swallow these errors and the next poll succeeds — we just
 // don't want them spamming the dev console.
 const quietProxyError = (proxy: {
@@ -18,11 +18,11 @@ const quietProxyError = (proxy: {
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5183,
+    port: 5173,
     strictPort: true,
     proxy: {
       "/api": {
-        target: "http://localhost:4031",
+        target: "http://localhost:4021",
         changeOrigin: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
         configure: quietProxyError,

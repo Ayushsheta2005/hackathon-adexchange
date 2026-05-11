@@ -23,23 +23,29 @@ export function createDemoRouter(deps: DemoDeps): Router {
         res.status(503).json({ error: "demo_not_configured", missing });
         return;
       }
-      // Surface "no inventory" as a 422 so the UI can prompt the user to
-      // register a listing first instead of showing a generic 500.
       const inventory = await deps.listingStore.list();
       if (inventory.length === 0) {
-        res
-          .status(422)
-          .json({ error: "no_inventory_available", hint: "Register an ad slot first" });
+        res.status(422).json({ error: "no_inventory_available", hint: "Register an ad slot first" });
         return;
       }
-      const result = await runAgentAuction({
-        exchangeUrl: deps.exchangeUrl,
-        listingStore: deps.listingStore,
-        personas: deps.personas,
-        gemini: deps.gemini,
-        buyerPrivateKey: deps.buyerPrivateKey,
-      });
-      res.status(200).json(result);
+      try {
+        const result = await runAgentAuction({
+          exchangeUrl: deps.exchangeUrl,
+          listingStore: deps.listingStore,
+          personas: deps.personas,
+          gemini: deps.gemini,
+          buyerPrivateKey: deps.buyerPrivateKey,
+        });
+        res.status(200).json(result);
+      } catch (innerErr) {
+        const msg = innerErr instanceof Error ? innerErr.message : String(innerErr);
+        if (msg.includes("no_inventory_available") || msg.includes("no_eligible_bids")) {
+          res.status(422).json({ error: msg });
+        } else {
+          // Surface real error so UI shows it instead of a generic "500"
+          res.status(500).json({ error: "agent_run_failed", detail: msg });
+        }
+      }
     } catch (err) {
       next(err);
     }

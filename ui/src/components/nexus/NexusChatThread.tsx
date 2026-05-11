@@ -36,7 +36,7 @@ export function NexusChatThread({
   }, [messages.length, showTyping]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-7 font-nexus bg-[#0a0f1a]">
+    <div className="nexus-chat flex-1 overflow-y-auto px-6 py-7 font-nexus bg-[#0a0f1a]">
       <div className="mx-auto flex max-w-2xl flex-col gap-5">
         <div className="mb-2 flex items-center gap-2.5">
           <div className="h-px flex-1 bg-white/10" />

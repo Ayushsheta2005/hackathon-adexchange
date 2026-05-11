@@ -25,10 +25,16 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
   const url = `${uiEnv.VITE_API_BASE_URL}${path}`;
   const res = await fetch(url, init);
   if (!res.ok) {
-    throw new Error(`API ${path} → ${res.status}`);
+    let detail = "";
+    try {
+      const body = (await res.json()) as Record<string, unknown>;
+      detail = (body.detail as string) ?? (body.error as string) ?? "";
+    } catch { /* ignore */ }
+    throw new Error(`API ${path} → ${res.status}${detail ? `: ${detail}` : ""}`);
   }
   return (await res.json()) as T;
 }
+
 
 const JSON_HEADERS = { "Content-Type": "application/json" };
 

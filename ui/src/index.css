@@ -77,13 +77,40 @@ body,
   animation-delay: 0.3s;
 }
 
-/* —— Nexus chat composer (reference layout; tokens map to Nexus oklch palette) —— */
+/* —— Chat Message Animations ——————————————————————————————————— */
+@keyframes nexus-msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nexus-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+  50%       { box-shadow: 0 0 12px 2px rgba(0, 229, 255, 0.12); }
+}
+
+/* Every article in the chat thread slides in */
+.nexus-chat article {
+  animation: nexus-msg-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* AI assistant bubble gets a subtle neon glow on appear */
+.nexus-chat article[aria-label$="assistant"] > div > div:last-child {
+  animation: nexus-glow-pulse 2.5s ease-in-out 0.3s 2;
+}
+
+/* —— Nexus chat composer (dark mode overrides) ——————————————— */
 .nexus-composer-wrap {
   --ac-ink-4: oklch(0.58 0.006 80);
 
   padding: 14px clamp(16px, 5vw, 36px) 22px;
-  border-top: 1px solid oklch(0.91 0.005 80);
-  background: linear-gradient(180deg, transparent, oklch(0.985 0.004 80) 30%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, transparent, #0a0f1a 40%);
 }
 
 .nexus-composer {

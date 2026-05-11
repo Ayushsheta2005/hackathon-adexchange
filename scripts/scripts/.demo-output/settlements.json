@@ -1,0 +1,352 @@
+[
+  {
+    "cycle": 1,
+    "txHash": "0xbabd7fb05a8f7341123b775096f13e8f56b0d0292149f786f1359e019e3b255f",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xbabd7fb05a8f7341123b775096f13e8f56b0d0292149f786f1359e019e3b255f",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 2,
+    "txHash": "0xa3d613b03aa6ebdfc820b2da5739562dd567c8bbe458a7533132a557a9c9377e",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xa3d613b03aa6ebdfc820b2da5739562dd567c8bbe458a7533132a557a9c9377e",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 3,
+    "txHash": "0x6f03fe7c70459263ff928c1a094aaa0ca4e3e9a178929cdf8b62937a278bad42",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x6f03fe7c70459263ff928c1a094aaa0ca4e3e9a178929cdf8b62937a278bad42",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 4,
+    "txHash": "0x55b83292bb16f06302ffc99b1b241119e936f7e6c86495928c3e94e2be013d18",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x55b83292bb16f06302ffc99b1b241119e936f7e6c86495928c3e94e2be013d18",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 5,
+    "txHash": "0x6178293955d9385ea171202cf0bcc371e8cf5508e156bf48b1e804c92a7537cb",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x6178293955d9385ea171202cf0bcc371e8cf5508e156bf48b1e804c92a7537cb",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 6,
+    "txHash": "0xbfc77ff20630851e93d9bc82c0dadb8206ab46345d299d9dea1ad3e7cd0d5256",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xbfc77ff20630851e93d9bc82c0dadb8206ab46345d299d9dea1ad3e7cd0d5256",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 7,
+    "txHash": "0xf4449142b358dd4a789ce33399721de52a4451ce60da8a67ad553a722047575c",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xf4449142b358dd4a789ce33399721de52a4451ce60da8a67ad553a722047575c",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 8,
+    "txHash": "0x228f21ba3b620c810b7d6cf23f1e7bc1d880225c361b052df06a5e88f7a483e0",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x228f21ba3b620c810b7d6cf23f1e7bc1d880225c361b052df06a5e88f7a483e0",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 9,
+    "txHash": "0x9c5415bcbd5627f1e26771055df1b7954a220fda24871306d7572f8cf4383c6d",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x9c5415bcbd5627f1e26771055df1b7954a220fda24871306d7572f8cf4383c6d",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 10,
+    "txHash": "0x6ef0a01be1791ce68a34ff3659a4f333ed3051415c2f691c512bb758365a77a7",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x6ef0a01be1791ce68a34ff3659a4f333ed3051415c2f691c512bb758365a77a7",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 11,
+    "txHash": "0x08b76cef2cd44e2405a5b617836c2e23831d5e538f948305f8bacbbe8145515f",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x08b76cef2cd44e2405a5b617836c2e23831d5e538f948305f8bacbbe8145515f",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 12,
+    "txHash": "0xa06fe11ced1bcfc6bf7ea6dd3952cc512495a4f65a957179502847cd4df6f2eb",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xa06fe11ced1bcfc6bf7ea6dd3952cc512495a4f65a957179502847cd4df6f2eb",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 13,
+    "txHash": "0xd7b561be53656e81fb1f1253b25016ad92f9bdd8dba03df239e20c844209a05b",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xd7b561be53656e81fb1f1253b25016ad92f9bdd8dba03df239e20c844209a05b",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 14,
+    "txHash": "0x9cd176e5d584dcef7b60e93626944fddccdb536a005361f4cfbad52e99ad5d92",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x9cd176e5d584dcef7b60e93626944fddccdb536a005361f4cfbad52e99ad5d92",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 15,
+    "txHash": "0x1ca9c4fb2c663a87ee62d39a60d4a5e92b6f4008ee2dcf0c69cdb9b817338999",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x1ca9c4fb2c663a87ee62d39a60d4a5e92b6f4008ee2dcf0c69cdb9b817338999",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 16,
+    "txHash": "0xd4c7ff82b06c1abd7a51e2082331e4be8bd443fb3d48cd120f9a64c1b55a863f",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xd4c7ff82b06c1abd7a51e2082331e4be8bd443fb3d48cd120f9a64c1b55a863f",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 17,
+    "txHash": "0x05c979c39d5919c9b301acf2877df6b6fa5b18259b4aefa601b8503e620b95b0",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x05c979c39d5919c9b301acf2877df6b6fa5b18259b4aefa601b8503e620b95b0",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 18,
+    "txHash": "0x96fe15cdf07e07f073d1a68465de12bf3b29ad1fb51315a4dc8037d953686061",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x96fe15cdf07e07f073d1a68465de12bf3b29ad1fb51315a4dc8037d953686061",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 19,
+    "txHash": "0xf0d54940e9248b96a9b55b76010c4f45898b9db8d3edb38a7c29041a67f55bb2",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xf0d54940e9248b96a9b55b76010c4f45898b9db8d3edb38a7c29041a67f55bb2",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 20,
+    "txHash": "0x85d2636a4abbc719e964ad7053aea872bb33a36657af778c5ed3eca3b0e8de98",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x85d2636a4abbc719e964ad7053aea872bb33a36657af778c5ed3eca3b0e8de98",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 21,
+    "txHash": "0x3085d40f2b580254d1f654a01c5611012ac9dd3e8de162f512a66415202fa964",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x3085d40f2b580254d1f654a01c5611012ac9dd3e8de162f512a66415202fa964",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 22,
+    "txHash": "0x77d32e39f861e3844baca640c6e63637d0cd440e4d9e5b4b843827a907051869",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x77d32e39f861e3844baca640c6e63637d0cd440e4d9e5b4b843827a907051869",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 23,
+    "txHash": "0x1212617e9400d3adafde4796c8ee9b8e6a02d59cae8e7deff63559270206fa35",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x1212617e9400d3adafde4796c8ee9b8e6a02d59cae8e7deff63559270206fa35",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 24,
+    "txHash": "0x74d0a31ae33029a8789c7f6352e9d070ed1c9e4dd7da4fecb1bdccf3c5ce0987",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x74d0a31ae33029a8789c7f6352e9d070ed1c9e4dd7da4fecb1bdccf3c5ce0987",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 25,
+    "txHash": "0xc877ef87e277d972108f66aa65b0ce4fa0ab184b38dbe1fe24563cfc2a52fb6f",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xc877ef87e277d972108f66aa65b0ce4fa0ab184b38dbe1fe24563cfc2a52fb6f",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 26,
+    "txHash": "0xd95648be84fb5ba6dfe84c768b255e39c79fe6d3f89dd93ed42216cc48788057",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xd95648be84fb5ba6dfe84c768b255e39c79fe6d3f89dd93ed42216cc48788057",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 27,
+    "txHash": "0x165c13c1243f89a4f5802a3312786a5b0fc4abc8ac59e4c60e02248dc6280955",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x165c13c1243f89a4f5802a3312786a5b0fc4abc8ac59e4c60e02248dc6280955",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 28,
+    "txHash": "0x755146b18c2961742f58305ff455a0e7a653a03a2b9e6c31f5346d8354645e2a",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x755146b18c2961742f58305ff455a0e7a653a03a2b9e6c31f5346d8354645e2a",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 29,
+    "txHash": "0x12d9e9b5444a6f1d2199e2fa5f378208176b63d2c089ca462aca20767204f974",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x12d9e9b5444a6f1d2199e2fa5f378208176b63d2c089ca462aca20767204f974",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 30,
+    "txHash": "0x31c3caefc1b33f49b2c8a9d7ca22807dd4cedbe65995ad0b27cc1b13b2c27ab5",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x31c3caefc1b33f49b2c8a9d7ca22807dd4cedbe65995ad0b27cc1b13b2c27ab5",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 31,
+    "txHash": "0xffd3a80178f92d41ff67cb5770765c6650927cb85fa23e03b22805019837dee2",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xffd3a80178f92d41ff67cb5770765c6650927cb85fa23e03b22805019837dee2",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 32,
+    "txHash": "0x432ad1aa707f811ab6bbb4522cd666c698a8e9ac119d3292dcaac2fc5666bcd4",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x432ad1aa707f811ab6bbb4522cd666c698a8e9ac119d3292dcaac2fc5666bcd4",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 33,
+    "txHash": "0xbf92e815965b30d36a93fd4590a582798b14f9762cbc7e33f86e6afd703d1ed6",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xbf92e815965b30d36a93fd4590a582798b14f9762cbc7e33f86e6afd703d1ed6",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 34,
+    "txHash": "0xc158e5067b21392c53e6a24285ef15968ab5fa0eb88d3813b88d1043dcd3f74d",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xc158e5067b21392c53e6a24285ef15968ab5fa0eb88d3813b88d1043dcd3f74d",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 35,
+    "txHash": "0x2ce88c579079432d3fae1cf26dfde9e5d63df070aaa37298ab3bcb0120f3619c",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x2ce88c579079432d3fae1cf26dfde9e5d63df070aaa37298ab3bcb0120f3619c",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 36,
+    "txHash": "0xe8ac3581f62f6e6194052989b407f763183ec7f28705bf0360cc7fc97b66a4ab",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xe8ac3581f62f6e6194052989b407f763183ec7f28705bf0360cc7fc97b66a4ab",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 37,
+    "txHash": "0xab78f95466b938e365bcc99848fab02ceb6d04b1e089566202f8ce7fc6927ac3",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xab78f95466b938e365bcc99848fab02ceb6d04b1e089566202f8ce7fc6927ac3",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 38,
+    "txHash": "0x0b768f1b78ea171ddde9fa512a9ff2c633139ce78834ee50dbd85179ca1f342c",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x0b768f1b78ea171ddde9fa512a9ff2c633139ce78834ee50dbd85179ca1f342c",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 39,
+    "txHash": "0x9a823dd58e43fd5f39a2bf47ccc5559d96b2dfe9777b5d04e50aa77565de1df6",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x9a823dd58e43fd5f39a2bf47ccc5559d96b2dfe9777b5d04e50aa77565de1df6",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 40,
+    "txHash": "0x000f665a54151c487aaad4ddb835537e7f97c49ee1866eceba94f02c7d2b625f",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x000f665a54151c487aaad4ddb835537e7f97c49ee1866eceba94f02c7d2b625f",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 41,
+    "txHash": "0xd113a26bdbc09da481504900590700fa286bc27ce0592cf5a00c7cd603276f6b",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xd113a26bdbc09da481504900590700fa286bc27ce0592cf5a00c7cd603276f6b",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 42,
+    "txHash": "0xed649573145aae818c034acfcb9081da6fdb3661885d3a47f9f04172f8c4ca38",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xed649573145aae818c034acfcb9081da6fdb3661885d3a47f9f04172f8c4ca38",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 43,
+    "txHash": "0xfcc047f43bfa442f7671f4ea1b1a645ab66f31ac2f93ef238c704e18b37d3764",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xfcc047f43bfa442f7671f4ea1b1a645ab66f31ac2f93ef238c704e18b37d3764",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 44,
+    "txHash": "0x15022ac8b1ec598b3d487f9b302537165033c0dabb2d5d0cf50a15091d0fcbe6",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x15022ac8b1ec598b3d487f9b302537165033c0dabb2d5d0cf50a15091d0fcbe6",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 45,
+    "txHash": "0x95ee4195a6c8c7a2bb984d151b74a86ea825928a2865b53d80b8b1bac3cb310a",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x95ee4195a6c8c7a2bb984d151b74a86ea825928a2865b53d80b8b1bac3cb310a",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 46,
+    "txHash": "0x59ef2f8cc06da969b80ed8ec87ce1ed8e543dc51a6b516d92f88a5cca3d8a82e",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x59ef2f8cc06da969b80ed8ec87ce1ed8e543dc51a6b516d92f88a5cca3d8a82e",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 47,
+    "txHash": "0x2f119b8e9b8265bae75a86c06a58c7962de49226610d6bba2cf1d1c421d224f6",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x2f119b8e9b8265bae75a86c06a58c7962de49226610d6bba2cf1d1c421d224f6",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 48,
+    "txHash": "0xccd5a5e670a7636c6970888b06ce1602dc9da349e255315e3dc0813a719486cd",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xccd5a5e670a7636c6970888b06ce1602dc9da349e255315e3dc0813a719486cd",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 49,
+    "txHash": "0xe52b72482a955cbd9d5e28822d5915451f70ecae4b17750a6f8ecbc45e8962b4",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0xe52b72482a955cbd9d5e28822d5915451f70ecae4b17750a6f8ecbc45e8962b4",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  },
+  {
+    "cycle": 50,
+    "txHash": "0x3738332495b29e78937acdafcc8cedd66a1ed818f4b736508a4ac60bb25ec582",
+    "explorerUrl": "https://testnet.arcscan.app/tx/0x3738332495b29e78937acdafcc8cedd66a1ed818f4b736508a4ac60bb25ec582",
+    "clearingPrice": "0.020000",
+    "status": "confirmed"
+  }
+]
