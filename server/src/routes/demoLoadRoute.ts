@@ -174,7 +174,6 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
             createdAt: new Date().toISOString(),
           });
           await deps.bidStore.add(bid);
-          deps.eventBus.emit("bid.received", bid);
         }
 
         // 4. Clear the auction — second-price winner emerges
