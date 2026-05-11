@@ -12,8 +12,8 @@ export const NANOPAYMENT_UNIT_USDC = "0.01" as const;
 /** Minimum allowed floor price a seller may list. */
 export const FLOOR_PRICE_MIN_USDC = "0.01" as const;
 
-/** Hard ceiling on any computed clearing price. */
-export const MAX_CLEARING_PRICE_USDC = "0.10" as const;
+/** Hard ceiling on any computed clearing price — hackathon invariant: ≤ $0.01 per action. */
+export const MAX_CLEARING_PRICE_USDC = "0.01" as const;
 
 /** LangGraph recursion cap (from autonomous-wallet-agent-tutorial § The Agent Loop). */
 export const MAX_AGENT_ITERATIONS = 5 as const;
