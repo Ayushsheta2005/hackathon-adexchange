@@ -1,1 +1,0 @@
-{"version":3,"file":"settlements.d.ts","sourceRoot":"","sources":["../../src/routes/settlements.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAEjC,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,oBAAoB,CAAC;AAE1D,MAAM,WAAW,cAAc;IAC7B,eAAe,EAAE,eAAe,CAAC;CAClC;AAED,wBAAgB,sBAAsB,CAAC,IAAI,EAAE,cAAc,GAAG,MAAM,CAWnE"}

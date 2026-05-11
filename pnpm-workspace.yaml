@@ -1,7 +1,0 @@
-packages:
-  - "shared"
-  - "server"
-  - "wallets"
-  - "ui"
-  - "scripts"
-  - "agents/*"

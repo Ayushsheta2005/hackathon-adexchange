@@ -1,1 +1,0 @@
-{"version":3,"file":"corsAllowList.d.ts","sourceRoot":"","sources":["../../src/middleware/corsAllowList.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,SAAS,CAAC;AAE9C;;;GAGG;AACH,wBAAgB,oBAAoB,CAAC,YAAY,EAAE,SAAS,MAAM,EAAE,GAAG,cAAc,CAWpF;AAED,qBAAa,iBAAkB,SAAQ,KAAK;IACvB,MAAM,EAAE,MAAM;gBAAd,MAAM,EAAE,MAAM;CAIlC"}
