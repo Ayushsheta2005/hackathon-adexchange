@@ -165,8 +165,6 @@ export function createDemoLoadRouter(deps: DemoLoadRouteDeps): Router {
             createdAt: new Date().toISOString(),
           });
           await deps.bidStore.add(bid);
-          // Note: we do NOT emit "bid.received" — that event does not exist in STREAM_EVENTS.
-          // The SSE stream emits auction.matched and settlement.confirmed from runAuction().
         }
 
         // 4. Clear the auction — second-price engine picks winner, fires SSE events
