@@ -37,7 +37,7 @@ const ServerEnvSchema = z
     LOG_LEVEL: z
       .enum(["trace", "debug", "info", "warn", "error", "fatal", "silent"])
       .default("info"),
-    CORS_ALLOW_ORIGINS: OriginListSchema.default("http://localhost:5173"),
+    CORS_ALLOW_ORIGINS: OriginListSchema.default("http://localhost:5183"),
     BID_RATE_LIMIT_PER_MIN: z.coerce.number().int().positive().default(120),
     ASSISTANT_CHAT_RATE_LIMIT_PER_MIN: z.coerce.number().int().positive().default(30),
     ARC_CHAIN_ID: z.coerce.number().int().positive().default(ARC_TESTNET_CHAIN_ID),
@@ -72,6 +72,9 @@ const ServerEnvSchema = z
     // returns 503 if any are missing when called.
     GEMINI_API_KEY: blankToUndefined(z.string().min(1).optional()),
     GEMINI_MODEL: blankToUndefined(z.string().min(1).default("gemini-2.5-flash")),
+    XAI_API_KEY: blankToUndefined(z.string().min(1).optional()),
+    XAI_MODEL: blankToUndefined(z.string().min(1).default("grok-4-1-fast-non-reasoning")),
+    XAI_BASE_URL: blankToUndefined(z.string().url().optional().default("https://api.x.ai/v1")),
     MAX_CLEARING_PRICE_USDC: z
       .string()
       .regex(/^\d+(?:\.\d{1,6})?$/)

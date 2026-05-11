@@ -22,7 +22,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "http://localhost:4031",
+        target: "http://localhost:4021",
         changeOrigin: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
         configure: quietProxyError,

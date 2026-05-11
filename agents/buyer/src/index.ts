@@ -26,6 +26,8 @@ export {
 export type { AgentTool } from "./tools/index.js";
 export { createGeminiLlmAdapter, zodToGeminiSchema } from "./llm/index.js";
 export type { GeminiLlmAdapterConfig, GoogleGenerativeAIClient } from "./llm/index.js";
+export { createGrokLlmAdapter } from "./llm/index.js";
+export type { GrokLlmAdapterConfig } from "./llm/index.js";
 
 interface BuildToolsDeps {
   exchangeUrl: string;

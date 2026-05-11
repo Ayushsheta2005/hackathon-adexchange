@@ -36,8 +36,8 @@ async function main(): Promise<void> {
 
   const buyerWalletRouting = buildBuyerWalletRouting(config);
   const personas = resolvePersonasFromEnv(process.env);
-  const gemini = config.GEMINI_API_KEY
-    ? { apiKey: config.GEMINI_API_KEY, model: config.GEMINI_MODEL ?? "gemini-2.5-flash" }
+  const xaiLlm = config.XAI_API_KEY
+    ? { apiKey: config.XAI_API_KEY, model: config.XAI_MODEL ?? "grok-4-1-fast-non-reasoning" }
     : undefined;
 
   const assistantGemini = config.GEMINI_API_KEY
@@ -75,7 +75,7 @@ async function main(): Promise<void> {
     demo: {
       exchangeUrl: `http://localhost:${config.PORT}`,
       personas,
-      gemini,
+      llmConfig: xaiLlm,
       // Only pass the private key when the payment gate is active.
       // When DISABLE_PAYMENT_GATE=true, agents use plain fetch (no signing).
       buyerPrivateKey: disableGate
@@ -112,7 +112,7 @@ async function main(): Promise<void> {
         corsAllowOrigins: config.CORS_ALLOW_ORIGINS,
         gatewayEnabled: Boolean(gateway),
         personaWallets: buyerWalletRouting.size,
-        demoEnabled: Boolean(gemini && personas.length > 0),
+        demoEnabled: Boolean(xaiLlm && personas.length > 0),
         demoMode: config.DEMO_MODE,
         autoClearDelayMs: config.AUCTION_AUTO_CLEAR_DELAY_MS,
         uiFixtureSeed: config.uiFixtureSeedEnabled,

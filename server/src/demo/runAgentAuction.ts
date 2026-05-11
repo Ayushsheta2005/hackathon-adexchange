@@ -4,7 +4,7 @@ import {
   buildGatewayClient,
   createBuyerAgent,
   createCheckBalanceTool,
-  createGeminiLlmAdapter,
+  createGrokLlmAdapter,
   createPlaceBidTool,
   createReviewAuctionTool,
   type AgentTool as BuyerAgentTool,
@@ -162,7 +162,7 @@ function buildBuyerAgentForPersona(
     createCheckBalanceTool({ exchangeUrl: cfg.exchangeUrl }),
     createReviewAuctionTool({ exchangeUrl: cfg.exchangeUrl }),
   ];
-  const llm = createGeminiLlmAdapter({ apiKey: cfg.apiKey, model: cfg.model, tools });
+  const llm = createGrokLlmAdapter({ apiKey: cfg.apiKey, model: cfg.model, tools });
   const systemPrompt = [
     `You are an autonomous buying agent operating on behalf of ${persona.brand}.`,
     "",
@@ -237,7 +237,7 @@ export interface AgentAuctionDeps {
    */
   listingStore: ListingStore;
   personas: ResolvedPersona[];
-  gemini: { apiKey: string; model: string };
+  llmConfig: { apiKey: string; model: string };
   /**
    * Shared EOA private key used to sign x402 payment authorizations for every
    * persona's bid. Optional: when absent, bids fall through to plain fetch and
@@ -295,8 +295,8 @@ export async function runAgentAuction(deps: AgentAuctionDeps): Promise<AgentAuct
   }));
   const buyers = deps.personas.map((p, i) =>
     buildBuyerAgentForPersona(p, {
-      apiKey: deps.gemini.apiKey,
-      model: deps.gemini.model,
+      apiKey: deps.llmConfig.apiKey,
+      model: deps.llmConfig.model,
       exchangeUrl: deps.exchangeUrl,
       gatewayClient,
       bidId: ctxs[i]!.bidId,
