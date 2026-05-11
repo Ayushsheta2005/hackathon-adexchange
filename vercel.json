@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter @ade/shared build && pnpm --filter @ade/ui build",
+  "outputDirectory": "ui/dist",
+  "framework": "vite",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pnpm install --frozen-lockfile && pnpm -r --filter=@ade/shared --filter=@ade/wallets --filter=@ade/agent-buyer --filter=@ade/agent-seller --filter=@ade/server build"
+  },
+  "deploy": {
+    "startCommand": "pnpm --filter @ade/server start",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
+  }
+}
