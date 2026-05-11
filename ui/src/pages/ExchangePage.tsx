@@ -99,7 +99,7 @@ export function ExchangePage(): JSX.Element {
       await refreshInventory();
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      if (msg.includes("503")) setAgentError("Agent demo not configured — set GEMINI_API_KEY in .env.local");
+      if (msg.includes("503")) setAgentError("Agent demo not configured — set XAI_API_KEY in .env.local");
       else if (msg.includes("422")) setAgentError("No inventory — register an ad slot first");
       else if (msg.includes("500")) setAgentError("Server error — check terminal logs for details");
       else setAgentError(msg);

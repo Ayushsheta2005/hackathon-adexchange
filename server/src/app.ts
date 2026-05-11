@@ -49,7 +49,7 @@ export interface AppDeps {
   demo?: {
     exchangeUrl: string;
     personas: import("./demo/runAgentAuction.js").ResolvedPersona[];
-    gemini?: { apiKey: string; model: string };
+    llmConfig?: { apiKey: string; model: string };
     /**
      * Shared EOA private key used by GatewayClient to sign x402 payment
      * authorizations for every persona's bid in the demo cycle. When absent,

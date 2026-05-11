@@ -36,7 +36,7 @@ export interface RegisterRoutesDeps {
   demo?: {
     exchangeUrl: string;
     personas: ResolvedPersona[];
-    gemini?: { apiKey: string; model: string };
+    llmConfig?: { apiKey: string; model: string };
     buyerPrivateKey?: `0x${string}`;
     mode: "in_process" | "external";
   };
@@ -105,7 +105,7 @@ export function registerRoutes(app: Express, deps: RegisterRoutesDeps): void {
         exchangeUrl: deps.demo.exchangeUrl,
         listingStore: deps.listingStore,
         personas: deps.demo.personas,
-        gemini: deps.demo.gemini,
+        llmConfig: deps.demo.llmConfig,
         buyerPrivateKey: deps.demo.buyerPrivateKey,
       }),
     );

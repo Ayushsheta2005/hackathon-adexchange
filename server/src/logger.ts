@@ -9,6 +9,7 @@ const REDACT_PATHS = [
   "CIRCLE_ENTITY_SECRET",
   "CIRCLE_API_KEY",
   "GEMINI_API_KEY",
+  "XAI_API_KEY",
   "EVM_PRIVATE_KEY",
   "req.headers.authorization",
   "req.headers.cookie",

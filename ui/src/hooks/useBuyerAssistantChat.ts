@@ -220,7 +220,7 @@ export function useBuyerAssistantChat(): UseBuyerAssistantChatResult {
         const safeReply =
           trimmedReply.length > 0
             ? trimmedReply
-            : "Nexus returned an empty reply. Try again, or check that **GEMINI_API_KEY** is set on the server and watch the server logs for errors.";
+            : "Nexus returned an empty reply. Try again, or check that **XAI_API_KEY** is set on the server and watch the server logs for errors.";
 
         const withAssistant: ChatLine[] = [
           ...messagesRef.current,
