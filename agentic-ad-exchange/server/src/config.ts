@@ -44,6 +44,8 @@ const ServerEnvSchema = z
     // Reason: blank strings from .env placeholders ("BUYER_WALLET_ID=") must be
     // treated as absent so the server starts without a funded wallet configured.
     BUYER_WALLET_ID: optionalWalletId,
+    BUYER_WALLET_ADDRESS: optionalAddr,
+
     // Per-persona buyer wallets — when set, the auction route routes settlement
     // through the wallet whose address matches the winning bid's buyerWallet.
     // Falls back to BUYER_WALLET_ID when no persona match is found.

@@ -23,7 +23,7 @@ export function BuyerAssistantPage(): JSX.Element {
     <>
       <NexusTopBar primary="Nexus" secondary="Exchange assistant" />
       <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(300px,420px)]">
-        <div className="flex min-h-0 flex-col border-r border-[oklch(0.91_0.005_80)] bg-[oklch(0.985_0.004_80)]">
+        <div className="flex min-h-0 flex-col border-r border-white/10 bg-[#0a0f1a]">
           <NexusChatThread
             messages={messages}
             assistantPending={sending}
@@ -31,7 +31,7 @@ export function BuyerAssistantPage(): JSX.Element {
             assistantAgentLabel="BUYER AGENT"
             assistantTypingName="Nexus"
           />
-          <div className="shrink-0 border-t border-[oklch(0.91_0.005_80)] px-6 pb-2">
+          <div className="shrink-0 border-t border-white/10 px-6 pb-2">
             <div className="mx-auto flex max-w-2xl flex-wrap gap-2 pt-2">
               {chipSuggestions.map((s) => (
                 <button
@@ -39,7 +39,7 @@ export function BuyerAssistantPage(): JSX.Element {
                   type="button"
                   disabled={sending || composerTyping}
                   onClick={() => void sendWithHistory(s)}
-                  className="rounded-full border border-[oklch(0.91_0.005_80)] bg-white px-3 py-1.5 text-left text-[11.5px] text-[oklch(0.36_0.01_80)] hover:border-[oklch(0.72_0.006_80)] disabled:opacity-50"
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-left text-[11.5px] text-slate-300 hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:text-cyan-300 disabled:opacity-40 transition-colors"
                 >
                   {s}
                 </button>

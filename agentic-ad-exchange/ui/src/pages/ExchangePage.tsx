@@ -2,7 +2,7 @@ import type { AdInventoryListing } from "@ade/shared";
 import type { JSX } from "react";
 import { useEffect, useState } from "react";
 
-import { postInventory, runAuction } from "../api/client.js";
+import { postInventory, runAuction, triggerAgentDemo } from "../api/client.js";
 import { AppNav } from "../components/AppNav.js";
 import { AuctionFeed } from "../components/AuctionFeed.js";
 import { AuctionPanel } from "../components/AuctionPanel.js";
@@ -32,6 +32,8 @@ export function ExchangePage(): JSX.Element {
 
   const [registering, setRegistering] = useState(false);
   const [running, setRunning] = useState(false);
+  const [agentRunning, setAgentRunning] = useState(false);
+  const [agentError, setAgentError] = useState<string | null>(null);
   const [activeListingId, setActiveListingId] = useState<string | null>(null);
   const [cycleAuctionId, setCycleAuctionId] = useState<string | null>(null);
 
@@ -84,6 +86,28 @@ export function ExchangePage(): JSX.Element {
     }
   }
 
+  async function handleRunAgentAuction(): Promise<void> {
+    setAgentRunning(true);
+    setAgentError(null);
+    try {
+      // Auto-register a listing if inventory is empty so the user doesn't need to click Step 1 first.
+      if (listings.length === 0) {
+        await handleRegisterListing();
+      }
+      await triggerAgentDemo();
+      await refreshBids();
+      await refreshInventory();
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("503")) setAgentError("Agent demo not configured — set GEMINI_API_KEY in .env.local");
+      else if (msg.includes("422")) setAgentError("No inventory — register an ad slot first");
+      else if (msg.includes("500")) setAgentError("Server error — check terminal logs for details");
+      else setAgentError(msg);
+    } finally {
+      setAgentRunning(false);
+    }
+  }
+
   async function handleRunAuction(): Promise<void> {
     if (!activeListingId) return;
     setRunning(true);
@@ -91,6 +115,9 @@ export function ExchangePage(): JSX.Element {
     try {
       await runAuction(activeListingId);
       await refreshBids();
+      // The server removes the listing after a confirmed settlement.
+      // Refresh inventory so the panel reflects the new state.
+      await refreshInventory();
     } catch (err) {
       console.error("Run auction failed:", err);
     } finally {
@@ -195,6 +222,9 @@ export function ExchangePage(): JSX.Element {
             lastAuction={lastAuction}
             lastReceipt={lastReceipt}
             activeListing={activeListing}
+            onRunAgentAuction={handleRunAgentAuction}
+            agentRunning={agentRunning}
+            agentError={agentError}
           />
           <AuctionPanel
             listings={listings}

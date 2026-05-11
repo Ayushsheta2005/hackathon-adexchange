@@ -26,17 +26,17 @@ export function SellerYieldRightPanel({
   const tablistId = useId();
 
   return (
-    <section className="flex min-h-0 min-w-0 flex-1 flex-col border-l border-[oklch(0.91_0.005_80)] bg-[oklch(0.97_0.005_80)] font-nexus">
-      <div className="flex shrink-0 flex-col gap-2 border-b border-[oklch(0.91_0.005_80)] px-4 py-3">
+    <section className="flex min-h-0 min-w-0 flex-1 flex-col border-l border-white/10 bg-[#0d1220] font-nexus">
+      <div className="flex shrink-0 flex-col gap-2 border-b border-white/10 px-4 py-3">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="text-[13px] font-semibold text-[oklch(0.18_0.01_80)]">Yield workspace</h2>
-          <span className="font-nexus-mono text-[10.5px] text-[oklch(0.45_0.01_80)]">demo</span>
+          <h2 className="text-[13px] font-semibold text-slate-200">Yield workspace</h2>
+          <span className="font-nexus-mono text-[10.5px] text-slate-500">demo</span>
         </div>
         <div
           id={tablistId}
           role="tablist"
           aria-label="Yield workspace modes"
-          className="flex flex-wrap gap-1 rounded-lg border border-[oklch(0.91_0.005_80)] bg-[oklch(0.99_0.004_80)] p-1"
+          className="flex flex-wrap gap-1 rounded-lg border border-white/10 bg-white/5 p-1"
         >
           {MODES.map((m) => {
             const selected = s.activeMode === m.id;
@@ -48,10 +48,10 @@ export function SellerYieldRightPanel({
                 aria-selected={selected}
                 id={`${tablistId}-${m.id}`}
                 onClick={() => s.setActiveMode(m.id)}
-                className={`relative flex flex-1 items-center justify-center gap-1 rounded-md py-2 text-center font-nexus-mono text-[10px] font-semibold uppercase tracking-wide min-w-[4.5rem] ${
+                className={`relative flex flex-1 items-center justify-center gap-1 rounded-md py-2 text-center font-nexus-mono text-[10px] font-semibold uppercase tracking-wide min-w-[4.5rem] transition-colors ${
                   selected
-                    ? "bg-white text-[oklch(0.18_0.01_80)] shadow-sm"
-                    : "text-[oklch(0.48_0.01_80)]"
+                    ? "bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-cyan-300 border border-cyan-500/30 shadow-sm"
+                    : "text-slate-500 hover:text-slate-300"
                 }`}
               >
                 {m.label}
@@ -64,7 +64,7 @@ export function SellerYieldRightPanel({
       <div
         role="tabpanel"
         aria-labelledby={`${tablistId}-${s.activeMode}`}
-        className={`min-h-0 flex-1 overflow-y-auto bg-[oklch(0.985_0.004_80)] p-5 transition-opacity duration-200 ${
+        className={`min-h-0 flex-1 overflow-y-auto bg-[#0d1220] p-5 transition-opacity duration-200 ${
           s.panelEntering ? "opacity-0" : "opacity-100"
         }`}
       >

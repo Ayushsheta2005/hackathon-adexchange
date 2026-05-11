@@ -36,14 +36,14 @@ export function NexusChatThread({
   }, [messages.length, showTyping]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-7 font-nexus">
+    <div className="flex-1 overflow-y-auto px-6 py-7 font-nexus bg-[#0a0f1a]">
       <div className="mx-auto flex max-w-2xl flex-col gap-5">
         <div className="mb-2 flex items-center gap-2.5">
-          <div className="h-px flex-1 bg-[oklch(0.94_0.004_80)]" />
-          <span className="font-nexus-mono text-[10px] font-semibold uppercase tracking-widest text-[oklch(0.62_0.006_80)]">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="font-nexus-mono text-[10px] font-semibold uppercase tracking-widest text-slate-500">
             Today
           </span>
-          <div className="h-px flex-1 bg-[oklch(0.94_0.004_80)]" />
+          <div className="h-px flex-1 bg-white/10" />
         </div>
         {messages.map((m) => (
           <NexusMessageBubble key={m.id} message={m} assistantAgentLabel={assistantAgentLabel} />

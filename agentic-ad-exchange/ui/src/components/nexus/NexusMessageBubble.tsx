@@ -45,25 +45,25 @@ function userComposerTag(message: ChatLine): { label: string; labelClass: string
 
 function userBubbleClassName(message: ChatLine): string {
   const base =
-    "rounded-xl border px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed text-[oklch(0.22_0.01_80)] shadow-sm inline-block";
+    "rounded-xl border px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed text-slate-200 shadow-sm inline-block";
   const buyer = message.userComposerMode;
   if (buyer === "goal") {
-    return `${base} border-[oklch(0.91_0.005_80)] border-l-4 border-l-amber-400 bg-white`;
+    return `${base} border-white/10 border-l-4 border-l-amber-400 bg-white/5`;
   }
   if (buyer === "policy") {
-    return `${base} border-[oklch(0.91_0.005_80)] border-l-4 border-l-blue-600 bg-white`;
+    return `${base} border-white/10 border-l-4 border-l-blue-500 bg-white/5`;
   }
   const seller = message.userSellerMode;
   if (seller === "set_floor") {
-    return `${base} border-[oklch(0.91_0.005_80)] border-l-4 border-l-amber-500 bg-white`;
+    return `${base} border-white/10 border-l-4 border-l-amber-500 bg-white/5`;
   }
   if (seller === "configure_deal") {
-    return `${base} border-[oklch(0.91_0.005_80)] border-l-4 border-l-blue-600 bg-white`;
+    return `${base} border-white/10 border-l-4 border-l-blue-500 bg-white/5`;
   }
   if (seller === "block_buyer") {
-    return `${base} border-[oklch(0.91_0.005_80)] border-l-4 border-l-red-600 bg-white`;
+    return `${base} border-white/10 border-l-4 border-l-red-500 bg-white/5`;
   }
-  return `${base} border-[oklch(0.91_0.005_80)] bg-white`;
+  return `${base} border-white/10 bg-white/5`;
 }
 
 export interface NexusMessageBubbleProps {
@@ -86,34 +86,34 @@ export function NexusMessageBubble({
       <div
         className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[10px] font-semibold tracking-wide ${
           isUser
-            ? "bg-[oklch(0.86_0.02_80)] text-[oklch(0.32_0.01_80)]"
-            : "bg-[oklch(0.18_0.01_80)] font-nexus-mono text-white"
+            ? "bg-slate-700 text-slate-300"
+            : "bg-gradient-to-br from-cyan-400 to-violet-500 font-nexus-mono text-white shadow-lg shadow-cyan-500/20"
         }`}
       >
-        {isUser ? "You" : "ATL"}
+        {isUser ? "You" : "NX"}
       </div>
       <div className={`min-w-0 flex-1 ${isUser ? "text-right" : ""}`}>
         <div className={`mb-1 flex flex-wrap items-baseline gap-2 ${isUser ? "justify-end" : ""}`}>
-          <span className="text-[13px] font-semibold text-[oklch(0.18_0.01_80)]">
+          <span className="text-[13px] font-semibold text-slate-200">
             {isUser ? "You" : assistantName}
           </span>
           {!isUser && (
-            <span className="rounded-full border border-[oklch(0.91_0.005_80)] bg-[oklch(0.97_0.005_80)] px-1.5 py-0.5 font-nexus-mono text-[10px] text-[oklch(0.45_0.01_80)]">
+            <span className="rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 font-nexus-mono text-[10px] text-slate-400">
               {assistantAgentLabel}
             </span>
           )}
           {!isUser && message.demoPreview && (
-            <span className="rounded-full border border-sky-200 bg-sky-50 px-1.5 py-0.5 text-[10px] font-medium text-sky-900">
+            <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-1.5 py-0.5 text-[10px] font-medium text-cyan-400">
               demo preview
             </span>
           )}
           {!isUser && message.usedFallback && (
-            <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">
+            <span className="rounded-full bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-medium text-amber-400">
               offline summary
             </span>
           )}
           <time
-            className="font-nexus-mono text-[10.5px] text-[oklch(0.62_0.006_80)]"
+            className="font-nexus-mono text-[10.5px] text-slate-500"
             dateTime={message.createdAt}
           >
             {new Date(message.createdAt).toLocaleTimeString([], {
@@ -131,7 +131,7 @@ export function NexusMessageBubble({
           className={
             isUser
               ? userBubbleClassName(message)
-              : "rounded-xl border border-[oklch(0.91_0.005_80)] bg-white px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed text-[oklch(0.22_0.01_80)] shadow-sm"
+              : "rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed text-slate-200 shadow-sm backdrop-blur-sm"
           }
         >
           <div className="whitespace-pre-wrap">{renderBoldMarkdown(message.content)}</div>

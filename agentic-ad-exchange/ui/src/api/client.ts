@@ -90,6 +90,22 @@ export async function triggerAgentDemo(): Promise<AgentDemoResult> {
   return apiFetch("/demo/agent-run", { method: "POST" });
 }
 
+export interface DemoLoadResult {
+  completed: number;
+  cycles: number;
+  totalUsdcSettled: string;
+  results: Array<{ cycle: number; txHash?: string; clearingPrice: string; status: string }>;
+}
+
+export async function runDemoLoad(cycles = 50): Promise<DemoLoadResult> {
+  return apiFetch("/demo/load", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cycles }),
+  });
+}
+
+
 export async function getControlState(): Promise<{ paused: boolean }> {
   return apiFetch("/control/state");
 }

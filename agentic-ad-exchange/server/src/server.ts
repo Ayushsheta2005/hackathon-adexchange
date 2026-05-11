@@ -6,6 +6,7 @@ import { resolvePersonasFromEnv } from "./demo/runAgentAuction.js";
 import { buildFixtureAuctionReplay, seedDevUiStores } from "./fixtures/devUiSeed.js";
 import { createLogger } from "./logger.js";
 import { createGatewayAdapter, type GatewayMiddlewareAdapter } from "./middleware/nanopayments.js";
+import { createDemoLoadRouter } from "./routes/demoLoadRoute.js";
 import { createBidStore, createListingStore, createSettlementStore } from "./state/stores.js";
 
 async function main(): Promise<void> {
@@ -20,14 +21,17 @@ async function main(): Promise<void> {
   }
 
   let gateway: GatewayMiddlewareAdapter | undefined;
-  if (config.SELLER_WALLET_ADDRESS) {
+  const disableGate = process.env.DISABLE_PAYMENT_GATE === "true";
+  if (config.SELLER_WALLET_ADDRESS && !disableGate) {
     gateway = createGatewayAdapter({
       sellerAddress: config.SELLER_WALLET_ADDRESS,
       facilitatorUrl: config.GATEWAY_FACILITATOR_URL,
     });
     logger.info({ sellerAddress: config.SELLER_WALLET_ADDRESS }, "gateway_nanopayments_enabled");
   } else {
-    logger.warn("SELLER_WALLET_ADDRESS not set — POST /bid has no payment gate");
+    logger.warn(
+      disableGate ? "DISABLE_PAYMENT_GATE=true — payment gate bypassed for demo load" : "SELLER_WALLET_ADDRESS not set — POST /bid has no payment gate"
+    );
   }
 
   const buyerWalletRouting = buildBuyerWalletRouting(config);
@@ -55,7 +59,7 @@ async function main(): Promise<void> {
     fixtureAuctionReplay = [];
   }
 
-  const { app } = createApp({
+  const { app, listingStore: appListingStore, bidStore: appBidStore, settlementStore: appSettlementStore, eventBus } = createApp({
     corsAllowOrigins: config.CORS_ALLOW_ORIGINS,
     bidRateLimitPerMin: config.BID_RATE_LIMIT_PER_MIN,
     assistantGemini,
@@ -72,12 +76,33 @@ async function main(): Promise<void> {
       exchangeUrl: `http://localhost:${config.PORT}`,
       personas,
       gemini,
-      buyerPrivateKey: config.BUYER_PRIVATE_KEY as `0x${string}` | undefined,
+      // Only pass the private key when the payment gate is active.
+      // When DISABLE_PAYMENT_GATE=true, agents use plain fetch (no signing).
+      buyerPrivateKey: disableGate
+        ? undefined
+        : (config.BUYER_PRIVATE_KEY as `0x${string}` | undefined),
       mode: config.DEMO_MODE,
     },
     autoClearDelayMs: config.AUCTION_AUTO_CLEAR_DELAY_MS,
     logger,
   });
+
+  // Mount the in-process demo load route (no terminal needed).
+  if (config.SELLER_WALLET_ADDRESS && config.BUYER_WALLET_ID) {
+    app.use(
+      createDemoLoadRouter({
+        listingStore: appListingStore,
+        bidStore: appBidStore,
+        settlementStore: appSettlementStore,
+        eventBus,
+        circleClient,
+        buyerWalletId: config.BUYER_WALLET_ID,
+        buyerWalletRouting,
+        sellerWalletAddress: config.SELLER_WALLET_ADDRESS,
+        buyerWalletAddress: config.BUYER_WALLET_ADDRESS ?? config.BUYER_LUXURYCO_WALLET_ADDRESS ?? "",
+      }),
+    );
+  }
 
   app.listen(config.PORT, () => {
     logger.info(

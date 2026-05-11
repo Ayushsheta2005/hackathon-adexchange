@@ -3,13 +3,9 @@ import type { JSX } from "react";
 import type { YieldDealRow } from "./yieldPanelTypes.js";
 
 function badgeClass(status: YieldDealRow["status"]): string {
-  if (status === "active") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-900";
-  }
-  if (status === "draft") {
-    return "border-slate-200 bg-slate-50 text-slate-800";
-  }
-  return "border-amber-200 bg-amber-50 text-amber-950";
+  if (status === "active") return "border-emerald-500/40 bg-emerald-500/10 text-emerald-400";
+  if (status === "draft") return "border-white/10 bg-white/5 text-slate-400";
+  return "border-amber-500/40 bg-amber-500/10 text-amber-400";
 }
 
 export interface SellerYieldDealsTabProps {
@@ -30,7 +26,7 @@ export function SellerYieldDealsTab({
       <button
         type="button"
         onClick={onNewDeal}
-        className="w-full rounded-lg border border-dashed border-[oklch(0.72_0.006_80)] bg-white py-2.5 text-[12.5px] font-semibold text-[oklch(0.28_0.01_80)] hover:bg-[oklch(0.98_0.004_80)]"
+        className="w-full rounded-xl border border-dashed border-cyan-500/30 bg-cyan-500/5 py-2.5 text-[12.5px] font-semibold text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500/50 transition-colors"
       >
         + New deal
       </button>
@@ -40,30 +36,26 @@ export function SellerYieldDealsTab({
           return (
             <li
               key={d.id}
-              className="rounded-[10px] border border-[oklch(0.91_0.005_80)] bg-white shadow-sm"
+              className="rounded-xl border border-white/10 bg-white/5 shadow-sm backdrop-blur-sm overflow-hidden transition-all"
             >
               <button
                 type="button"
-                className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left"
+                className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-white/5 transition-colors"
                 onClick={() => onToggleDeal(d.id)}
                 aria-expanded={open}
               >
-                <span className="text-[13px] font-semibold text-[oklch(0.22_0.01_80)]">
-                  {d.name}
-                </span>
-                <span
-                  className={`shrink-0 rounded-full border px-2 py-0.5 font-nexus-mono text-[9px] font-semibold uppercase ${badgeClass(d.status)}`}
-                >
+                <span className="text-[13px] font-semibold text-slate-200">{d.name}</span>
+                <span className={`shrink-0 rounded-full border px-2 py-0.5 font-nexus-mono text-[9px] font-semibold uppercase ${badgeClass(d.status)}`}>
                   {d.status}
                 </span>
               </button>
               {open ? (
-                <div className="border-t border-[oklch(0.94_0.004_80)] px-3 py-2 font-nexus-mono text-[11.5px] text-[oklch(0.35_0.01_80)]">
-                  <div>CPM {d.cpm}</div>
-                  <div>Duration {d.duration}</div>
-                  <div>Imps/mo {d.impsPerMo}</div>
-                  <div>Buyer {d.buyer}</div>
-                  <div className="mt-1 text-[10.5px] text-[oklch(0.5_0.01_80)]">Deal ID {d.id}</div>
+                <div className="border-t border-white/10 px-3 py-2.5 font-nexus-mono text-[11.5px] text-slate-400 space-y-1">
+                  <div className="flex justify-between"><span className="text-slate-500">CPM</span><span className="text-cyan-400">{d.cpm}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Duration</span><span className="text-slate-300">{d.duration}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Imps/mo</span><span className="text-slate-300">{d.impsPerMo}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Buyer</span><span className="text-slate-300">{d.buyer}</span></div>
+                  <div className="mt-1 text-[10.5px] text-slate-600">Deal ID {d.id}</div>
                 </div>
               ) : null}
             </li>

@@ -66,6 +66,9 @@ export interface BuyerPanelProps {
   lastAuction: AuctionResult | null;
   lastReceipt: SettlementReceipt | null;
   activeListing: AdInventoryListing | null;
+  onRunAgentAuction: () => Promise<void>;
+  agentRunning: boolean;
+  agentError: string | null;
 }
 
 export function BuyerPanel({
@@ -73,6 +76,9 @@ export function BuyerPanel({
   lastAuction,
   lastReceipt,
   activeListing,
+  onRunAgentAuction,
+  agentRunning,
+  agentError,
 }: BuyerPanelProps): JSX.Element {
   return (
     <section
@@ -89,13 +95,33 @@ export function BuyerPanel({
             </span>
             <h2 className="text-sm font-semibold text-slate-100">Buyer Agents</h2>
           </div>
-          <p className="mt-1 text-xs text-slate-500">3 AI personas · Circle DCW wallets</p>
+      <p className="mt-1 text-xs text-slate-500">3 AI personas · Circle DCW wallets</p>
         </div>
         <span className="flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-blue-400">
           <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
           Step 2
         </span>
       </div>
+
+      {/* Run Multi-Agent Auction button */}
+      <button
+        id="run-agent-auction-btn"
+        onClick={() => void onRunAgentAuction()}
+        disabled={agentRunning}
+        className="group relative mt-4 w-full overflow-hidden rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-blue-300 transition-all duration-200 hover:border-blue-400/70 hover:bg-blue-500/20 hover:shadow-[0_0_12px_rgba(59,130,246,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {agentRunning ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-blue-400/30 border-t-blue-400" />
+            AI agents bidding…
+          </span>
+        ) : (
+          "🤖  Run Multi-Agent Auction"
+        )}
+      </button>
+      {agentError && (
+        <p className="mt-1.5 text-center text-[11px] text-red-400">{agentError}</p>
+      )}
 
       {/* Persona roster */}
       <div className="mt-4 space-y-2">

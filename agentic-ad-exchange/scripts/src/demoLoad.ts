@@ -77,13 +77,6 @@ export async function runDemoLoad(deps: DemoLoadDeps = {}): Promise<DemoLoadResu
     );
   }
 
-  // Register a demo listing so the auction route has a listing to match bids against.
-  const listingId = await registerDemoListing({
-    exchangeApiUrl,
-    sellerWallet: SELLER_WALLET_ADDRESS,
-    floorUsdc,
-  });
-
   banner("Demo Load — starting", [
     `Cycles: ${cycles}  (≥ 50 satisfies hackathon gate)`,
     `Exchange: ${exchangeApiUrl}`,
@@ -95,6 +88,14 @@ export async function runDemoLoad(deps: DemoLoadDeps = {}): Promise<DemoLoadResu
   const results: DemoCycleResult[] = [];
   let totalAtomic = 0n;
   for (let i = 1; i <= cycles; i++) {
+    // Register a fresh listing each cycle — the server removes the listing
+    // from the store after a confirmed settlement, so reusing the same
+    // listingId would 404 on every cycle after the first.
+    const listingId = await registerDemoListing({
+      exchangeApiUrl,
+      sellerWallet: SELLER_WALLET_ADDRESS,
+      floorUsdc,
+    });
     const result = await runDemoCycle({
       exchangeApiUrl,
       listingId,
