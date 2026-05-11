@@ -1,0 +1,1 @@
+{"version":3,"file":"pauseGuard.d.ts","sourceRoot":"","sources":["../../src/middleware/pauseGuard.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,SAAS,CAAC;AAE9C,OAAO,KAAK,EAAE,YAAY,EAAE,MAAM,0BAA0B,CAAC;AAE7D;;;;;GAKG;AACH,wBAAgB,gBAAgB,CAAC,YAAY,EAAE,YAAY,GAAG,cAAc,CAQ3E"}
